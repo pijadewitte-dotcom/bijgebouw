@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EXZO AI Bijgebouw Configurator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Gebaseerd op publieke EXZO-informatie</p>
+          <h1>AI bijgebouw configurator</h1>
+          <p>
+            Stel een bijgebouw samen zoals EXZO het aanbod opbouwt: functie,
+            bouwmethode, systeem, dakvorm, afwerking en maatwerk. De configurator
+            geeft meteen een passend basismodel, richtprijs en aandachtspunten.
+          </p>
+        </div>
+        <div class="hero-panel" aria-label="Samenvatting">
+          <span class="metric" id="heroPrice">€ 0</span>
+          <span class="metric-label">geschat budget incl. gekozen opties</span>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <form class="configurator" id="configForm">
+          <div class="section-title">
+            <h2>Project</h2>
+            <span>1 van 4</span>
+          </div>
+          <label>
+            Waarvoor dient het bijgebouw?
+            <select id="purpose">
+              <option value="storage">Opbergruimte / tuinhuis</option>
+              <option value="lounge">Lounge / buitenkeuken / poolhouse</option>
+              <option value="car">Garage / carport</option>
+              <option value="office">Tuinkantoor / woonunit</option>
+              <option value="camping">Camping / glamping accommodatie</option>
+            </select>
+          </label>
+
+          <div class="grid-2">
+            <label>
+              Breedte
+              <input id="width" type="number" min="2" max="14" step="0.1" value="6" />
+            </label>
+            <label>
+              Diepte
+              <input id="depth" type="number" min="2" max="9" step="0.1" value="3" />
+            </label>
+          </div>
+
+          <label>
+            Budgetniveau
+            <select id="budget">
+              <option value="lean">Scherp budget</option>
+              <option value="balanced" selected>Prijs-kwaliteit</option>
+              <option value="premium">Premium / comfort</option>
+            </select>
+          </label>
+
+          <div class="section-title">
+            <h2>Bouwkeuze</h2>
+            <span>2 van 4</span>
+          </div>
+          <label>
+            Kluservaring
+            <select id="experience">
+              <option value="beginner">Beginner</option>
+              <option value="handy" selected>Handige doe-het-zelver</option>
+              <option value="expert">Ervaren bouwer</option>
+            </select>
+          </label>
+
+          <label>
+            Gewenste look
+            <select id="style">
+              <option value="modern">Modern en strak</option>
+              <option value="landelijk">Landelijk / eik-douglas</option>
+              <option value="praktisch">Praktisch en functioneel</option>
+              <option value="luxe">Luxueus afgewerkt</option>
+            </select>
+          </label>
+
+          <label>
+            Dakvorm
+            <select id="roof">
+              <option value="auto">AI kiest dakvorm</option>
+              <option value="plat">Plat dak</option>
+              <option value="zadeldak">Zadeldak</option>
+              <option value="schilddak">Schilddak</option>
+              <option value="kapschuur">Kapschuur</option>
+            </select>
+          </label>
+
+          <div class="section-title">
+            <h2>Afwerking</h2>
+            <span>3 van 4</span>
+          </div>
+          <fieldset class="checks">
+            <legend>Toevoegen</legend>
+            <label><input id="closedPart" type="checkbox" checked /> Afgesloten berging</label>
+            <label><input id="insulation" type="checkbox" /> Isolatie voor kantoor/wonen</label>
+            <label><input id="doors" type="checkbox" checked /> Ramen en deuren</label>
+            <label><input id="delivery" type="checkbox" /> Levering voorzien</label>
+          </fieldset>
+
+          <label>
+            Gevelbekleding
+            <select id="cladding">
+              <option value="none">Nog zelf te kiezen / niet inbegrepen</option>
+              <option value="vuren">Vuren / grenen</option>
+              <option value="thermo">Thermowood / thermo ayous</option>
+              <option value="padouk">Padouk of tropisch hardhout</option>
+            </select>
+          </label>
+
+          <button type="submit">Configuratie berekenen</button>
+        </form>
+
+        <section class="result" aria-live="polite">
+          <div class="visual" id="buildingVisual">
+            <div class="roof"></div>
+            <div class="body">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="recommendation">
+            <p class="eyebrow">AI-advies</p>
+            <h2 id="adviceTitle">Kies je project en bereken</h2>
+            <p id="adviceText">De configurator gebruikt Exzo-categorieen en keuzehulpen om een passend voorstel te maken.</p>
+          </div>
+
+          <div class="price-box">
+            <div>
+              <span>Basismodel</span>
+              <strong id="baseModel">-</strong>
+            </div>
+            <div>
+              <span>Richtprijs</span>
+              <strong id="price">€ 0</strong>
+            </div>
+            <div>
+              <span>Oppervlakte</span>
+              <strong id="surface">0 m²</strong>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab active" data-tab="parts" type="button">Pakket</button>
+            <button class="tab" data-tab="rules" type="button">AI-regels</button>
+            <button class="tab" data-tab="sources" type="button">Bronnen</button>
+          </div>
+          <div class="tab-panel" id="tabPanel"></div>
+        </section>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
